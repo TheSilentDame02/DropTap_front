@@ -1,10 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, HStack } from "@chakra-ui/react";
+import Header from "./Components/Header";
+import Notifications from "./Components/Notifications";
+import Sidebar from "./Components/Sidebar";
+import Accueil from "./Components/Accueil";
+import "./Assets/Styles/App.css";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }
