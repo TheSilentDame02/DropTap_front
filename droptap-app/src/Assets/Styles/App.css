@@ -1,0 +1,12 @@
+.App {
+    height: 100%;
+    background: linear-gradient(135deg, #d4f0ff , #f3faff);
+}
+/* what comes next to sidebar */
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+
