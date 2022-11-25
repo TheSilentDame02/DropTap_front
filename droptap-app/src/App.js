@@ -7,24 +7,24 @@ import "./Assets/Styles/App.css";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <HStack spacing="7" mr="5">
+                <Sidebar />
+                <Box h="100vh" w="100%">
+                    <Header />
+                    <Box>
+                        {/* main area */}
+                        <Routes>
+                            <Route path="/" element={<Accueil />} />
+                            <Route path="/home" element={<Accueil />} />
+                        </Routes>
+                    </Box>
+                </Box>
+                <Notifications />
+            </HStack>
+        </div>
+    );
 }
 
 export default App;
