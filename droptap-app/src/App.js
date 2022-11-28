@@ -8,9 +8,8 @@ import {
     GridItem,
 } from "@chakra-ui/react";
 import Header from "./Components/Header";
-import Notifications from "./Components/Notifications";
 import Sidebar from "./Components/Sidebar";
-import Accueil from "./Components/Accueil";
+import Accueil from "./Pages/Accueil";
 import "./Assets/Styles/App.css";
 import { Routes, Route } from "react-router-dom";
 
@@ -22,7 +21,7 @@ function App() {
                     mr="5"
                     h="100%"
                     templateColumns={"15rem 1fr 1fr 1fr 1fr 1fr 20rem"}
-                    templateRows={"7rem 30px 1fr 1fr 30px 1fr 5rem"}
+                    templateRows={"7rem 1rem 1fr 1fr 1rem 1fr 5rem"}
                     gap={4}
                 >
                     <GridItem colSpan={1} rowSpan={7}>
