@@ -3,88 +3,85 @@ import React from "react";
 import { RiAlertFill } from "react-icons/ri";
 import { IoAlertCircle } from "react-icons/io5";
 
+function NotificationItem() {
+    const NotificationList = [
+        {
+            title: "Une fuite a été détectée.",
+            type: "red",
+            description: "Veuillez intervenir au plus tôt possible.",
+            date: "Mardi 12 Novembre, 13h00",
+        },
+
+        {
+            title: "La qualité de l'eau n'est pas optimale.",
+            type: "yellow",
+            description: "",
+            date: "Mardi 12 Novembre, 13h00",
+        },
+    ];
+    return (
+        <div>
+            {NotificationList.map((item, index) => (
+                <Box key={index}
+                    borderRadius="20px"
+                    bg="white"
+                    boxShadow="xl"
+                    pl={2}
+                    pr={5}
+                    py={4}
+                    mb={2}
+                >
+                    <HStack align="flex-start">
+                        {item.type==="red" &&
+                            <Icon
+                            as={ RiAlertFill }
+                            color="#FA1616"
+                            w="32px"
+                            h="32px"
+                            ml="5px"
+                            mt={2}
+                            />
+                        }
+                        {item.type==="yellow" &&
+                            <Icon
+                            as={ IoAlertCircle }
+                            color="#FFD60A"
+                            w="32px"
+                            h="32px"
+                            ml="5px"
+                            mt={2}
+                            />
+                        }
+                        
+                        <Box w="100%">
+                            <Text fontSize="sm" fontWeight="semibold">
+                                {item.title}
+                            </Text>
+                            <Text fontSize="xs">{item.description}</Text>
+                            <Text color="grey" fontSize="xs" mt={2}>
+                                {item.time}
+                            </Text>
+                            <Text
+                                fontSize="xs"
+                                fontWeight="semibold"
+                                align="right"
+                                mt={2}
+                            >
+                                Marquer comme lu
+                            </Text>
+                        </Box>
+                    </HStack>
+                </Box>
+            ))}
+        </div>
+    );
+}
+
 function Notifications() {
     return (
-        <Box w="26rem" h="100vh" pt="50px">
-            <VStack spacing="20px" align="stretch">
-                <Heading as="h1" size="md" fontWeight="600">
-                    Notifications
-                </Heading>
-                <Box
-                    borderRadius="20px"
-                    bg="white"
-                    boxShadow="xl"
-                    pl={2}
-                    pr={5}
-                    py={4}
-                >
-                    <HStack align="flex-start">
-                        <Icon
-                            as={RiAlertFill}
-                            w="32px"
-                            h="32px"
-                            color="red"
-                            ml="5px"
-                            mt={2}
-                        />
-                        <Box>
-                            <Text fontSize="md" fontWeight="semibold">
-                                Une fuite a été détectée.
-                            </Text>
-                            <Text fontSize="sm">
-                                Veuillez intervenir au plus tôt possible.
-                            </Text>
-                            <Text color="grey" fontSize="xs" mt={2}>
-                                Mardi 12 Novembre, 13h00
-                            </Text>
-                            <Text
-                                fontSize="sm"
-                                fontWeight="semibold"
-                                align="right"
-                                mt={2}
-                            >
-                                Marquer comme lu
-                            </Text>
-                        </Box>
-                    </HStack>
-                </Box>
-
-                <Box
-                    borderRadius="20px"
-                    bg="white"
-                    boxShadow="xl"
-                    pl={2}
-                    pr={5}
-                    py={4}
-                >
-                    <HStack align="flex-start">
-                        <Icon
-                            as={IoAlertCircle}
-                            w="32px"
-                            h="32px"
-                            color="#FFC700"
-                            ml="5px"
-                            mt={2}
-                        />
-                        <Box>
-                            <Text fontSize="md" fontWeight="semibold">
-                                La qualité de l'eau n'est pas optimale.
-                            </Text>
-
-                            <Text color="grey" fontSize="xs" mt={2}>
-                                Mardi 12 Novembre, 13h00
-                            </Text>
-                            <Text
-                                fontSize="sm"
-                                fontWeight="semibold"
-                                align="right"
-                                mt={2}
-                            >
-                                Marquer comme lu
-                            </Text>
-                        </Box>
-                    </HStack>
-                </Box>
+        <Box>
+            <VStack spacing="10px" align="stretch">
+                {NotificationItem()}
             </VStack>
         </Box>
     );

@@ -1,4 +1,4 @@
-import { Flex, Link, Box, Image, VStack, Text, Icon } from "@chakra-ui/react";
+import { Flex, Link, Box, Image, VStack, Text, Icon, Center } from "@chakra-ui/react";
 import React from "react";
 import {
     BiHome,
@@ -7,6 +7,7 @@ import {
     BiBarChartSquare,
 } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
+import { ReactComponent as Logo } from '../Assets/Images/logo.svg';
 
 const LinkItems = [
     { name: "Accueil", icon: BiHome, path: "/home" },
@@ -30,7 +31,7 @@ const NavItem = ({ name, icon, path, children, ...props }) => {
                 role="group"
                 cursor="pointer"
                 _hover={{
-                    bg: "#55C2FF",
+                    bg: "#F45B69",
                     color: "white",
                 }}
                 {...props}
@@ -43,6 +44,7 @@ const NavItem = ({ name, icon, path, children, ...props }) => {
                             color: "white",
                         }}
                         as={icon}
+                        color="#F45B69"
                     />
                 )}
                 {children}
@@ -53,23 +55,10 @@ const NavItem = ({ name, icon, path, children, ...props }) => {
 
 function Sidebar() {
     return (
-        <Box bg="rgba(255,255,255, 0.5)" w="18rem" h="100vh" py={4} px={5}>
-            <VStack ml="2" mt="6" mb='3' align="stretch">
-                <Image
-                    borderRadius="full"
-                    boxSize="70px"
-                    src="https://hwchamber.co.uk/wp-content/uploads/2022/04/avatar-placeholder.gif"
-                    alt="profile-pic"
-                    mb="2"
-                />
-                <Text fontSize="xl">
-                    Bonjour,{" "}
-                    <Text as="span" fontWeight="600">
-                        User
-                    </Text>
-                    .
-                </Text>
-            </VStack>
+        <Box bg="#FFFFFF" h="100vh" py={4} px={5}>
+            <Center mt="1rem" h="6rem">
+                <Logo height="70px"/>
+            </Center>
 
             {LinkItems.map((link) => (
                 <NavItem key={link.name} icon={link.icon} path={link.path}>

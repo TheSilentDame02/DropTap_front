@@ -1,4 +1,12 @@
-import { Box, HStack } from "@chakra-ui/react";
+import {
+    Flex,
+    Box,
+    HStack,
+    Heading,
+    Text,
+    Grid,
+    GridItem,
+} from "@chakra-ui/react";
 import Header from "./Components/Header";
 import Notifications from "./Components/Notifications";
 import Sidebar from "./Components/Sidebar";
@@ -9,20 +17,25 @@ import { Routes, Route } from "react-router-dom";
 function App() {
     return (
         <div className="App">
-            <HStack spacing="7" mr="5">
-                <Sidebar />
-                <Box h="100vh" w="100%">
-                    <Header />
-                    <Box>
-                        {/* main area */}
-                        <Routes>
-                            <Route path="/" element={<Accueil />} />
-                            <Route path="/home" element={<Accueil />} />
-                        </Routes>
-                    </Box>
-                </Box>
-                <Notifications />
-            </HStack>
+            <Box className="app-glass" pb={5}>
+                <Grid
+                    mr="5"
+                    h="100%"
+                    templateColumns={"15rem 1fr 1fr 1fr 1fr 1fr 20rem"}
+                    templateRows={"7rem 30px 1fr 1fr 30px 1fr 5rem"}
+                    gap={4}
+                >
+                    <GridItem colSpan={1} rowSpan={7}>
+                        <Sidebar />
+                    </GridItem>
+                    <GridItem colSpan={6} rowSpan={1}>
+                        <Header/>
+                    </GridItem>
+                    <Routes>
+                        <Route path="/" element={<Accueil/>}/>
+                    </Routes>
+                </Grid>
+            </Box>
         </div>
     );
 }
