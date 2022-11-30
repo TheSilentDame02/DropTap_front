@@ -59,7 +59,7 @@ function NotificationItem() {
                             </Text>
                             <Text fontSize="xs">{item.description}</Text>
                             <Text color="grey" fontSize="xs" mt={2}>
-                                {item.time}
+                                {item.date}
                             </Text>
                             <Text
                                 fontSize="xs"
