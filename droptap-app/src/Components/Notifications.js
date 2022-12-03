@@ -18,6 +18,18 @@ function NotificationItem() {
             description: "",
             date: "Mardi 12 Novembre, 13h00",
         },
+        {
+            title: "La qualité de l'eau n'est pas optimale.",
+            type: "yellow",
+            description: "",
+            date: "Mardi 12 Novembre, 13h00",
+        },
+        {
+            title: "La qualité de l'eau n'est pas optimale.",
+            type: "yellow",
+            description: "",
+            date: "Mardi 12 Novembre, 13h00",
+        }
     ];
     return (
         <div>
@@ -80,7 +92,7 @@ function NotificationItem() {
 function Notifications() {
     return (
         <Box>
-            <VStack spacing="10px" align="stretch">
+            <VStack spacing="10px" align="stretch" mr="10px">
                 {NotificationItem()}
             </VStack>
         </Box>

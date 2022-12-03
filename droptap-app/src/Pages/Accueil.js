@@ -7,6 +7,7 @@ import {
     Box,
     Heading,
     Text,
+    Grid,
 } from "@chakra-ui/react";
 import React from "react";
 import Notifications from "../Components/Notifications";
@@ -19,7 +20,6 @@ import "react-circular-progressbar/dist/styles.css";
 import QualityGood from "../Assets/Images/quality-good.jpg";
 import QualityBad from "../Assets/Images/quality-bad.jpg";
 import QualityMedium from "../Assets/Images/quality-medium.jpg";
-
 
 function ProgressBar({ conso, seuil, titre, date }) {
     const strokeColor = conso / seuil > 1 ? `#F45B69` : `#55C2FF`;
@@ -86,151 +86,172 @@ function Accueil() {
 
     return (
         <>
-            <GridItem colSpan={5} rowSpan={1}>
-                <Heading as="h1" size="md" fontWeight="600">
-                    Ma consommation
-                </Heading>
-            </GridItem>
-            <GridItem colSpan={1} rowSpan={1}>
-                <Heading as="h1" size="md" fontWeight="600">
-                    Notifications
-                </Heading>
-            </GridItem>
-            <GridItem colSpan={2} rowSpan={2}>
-                <Box
-                    boxShadow="xl"
-                    p="8"
-                    h="100%"
-                    borderRadius="20px"
-                    bg="white"
-                >
-                    <ProgressBar
-                        conso={consoJour}
-                        seuil={seuilJour}
-                        titre="Aujourd'hui"
-                        date={today}
-                    />
-                </Box>
-            </GridItem>
-
-            <GridItem colSpan={2} rowSpan={2}>
-                <Box
-                    boxShadow="xl"
-                    p="8"
-                    h="100%"
-                    borderRadius="20px"
-                    bg="white"
-                >
-                    <ProgressBar
-                        conso={consoMois}
-                        seuil={seuilMois}
-                        titre="Ce mois"
-                        date={thisMonth}
-                    />
-                </Box>
-            </GridItem>
-            <GridItem>
-                <Box
-                    boxShadow="xl"
-                    p="8"
-                    h="100%"
-                    borderRadius="20px"
-                    bg="white"
-                >
-                    <VStack>
-                        <Text>Robinet</Text>
-                        <Switch
-                            size="lg"
-                            isChecked={robinet && "isChecked"}
-                            onChange={toggleRobinet}
+            <Grid
+                mr={4}
+                mb={4}
+                templateColumns={"1fr 1fr 1fr 1fr 1fr 20rem"}
+                templateRows={"1rem 8rem 8rem 1rem 1fr"}
+                gap={4}
+            >
+                <GridItem colSpan={5} rowSpan={1}>
+                    <Heading as="h1" size="md" fontWeight="600">
+                        Ma consommation
+                    </Heading>
+                </GridItem>
+                <GridItem colSpan={1} rowSpan={1}>
+                    <Heading as="h1" size="md" fontWeight="600">
+                        Notifications
+                    </Heading>
+                </GridItem>
+                <GridItem colSpan={2} rowSpan={2}>
+                    <Box
+                        boxShadow="xl"
+                        p="8"
+                        h="100%"
+                        borderRadius="20px"
+                        bg="white"
+                    >
+                        <ProgressBar
+                            conso={consoJour}
+                            seuil={seuilJour}
+                            titre="Aujourd'hui"
+                            date={today}
                         />
-                    </VStack>
-                </Box>
-            </GridItem>
+                    </Box>
+                </GridItem>
 
-            <GridItem colSpan={1} rowSpan={2}>
-                <Notifications />
-            </GridItem>
-
-            <GridItem>
-                <Box
-                    boxShadow="xl"
-                    p="8"
-                    h="100%"
-                    borderRadius="20px"
-                    bg="white"
-                >
-                    <VStack>
-                        <Text align="center">Détection des fuites</Text>
-                        <Switch
-                            size="lg"
-                            isChecked={detection && "isChecked"}
-                            onChange={toggleDetection}
+                <GridItem colSpan={2} rowSpan={2}>
+                    <Box
+                        boxShadow="xl"
+                        p="8"
+                        h="100%"
+                        borderRadius="20px"
+                        bg="white"
+                    >
+                        <ProgressBar
+                            conso={consoMois}
+                            seuil={seuilMois}
+                            titre="Ce mois"
+                            date={thisMonth}
                         />
-                    </VStack>
-                </Box>
-            </GridItem>
+                    </Box>
+                </GridItem>
+                <GridItem>
+                    <Box
+                        boxShadow="xl"
+                        p="8"
+                        h="100%"
+                        borderRadius="20px"
+                        bg="white"
+                    >
+                        <VStack>
+                            <Text>Robinet</Text>
+                            <Switch
+                                size="lg"
+                                isChecked={robinet && "isChecked"}
+                                onChange={toggleRobinet}
+                            />
+                        </VStack>
+                    </Box>
+                </GridItem>
 
-            <GridItem colSpan={3} rowSpan={1}>
-                <Heading as="h1" size="md" fontWeight="600">
-                    Qualité de l'eau
-                </Heading>
-            </GridItem>
-
-            <GridItem colSpan={3} rowSpan={1}>
-                <Heading as="h1" size="md" fontWeight="600">
-                    Statistiques
-                </Heading>
-            </GridItem>
-
-            <GridItem colSpan={3} rowSpan={2}>
-                <Box
-                    boxShadow="xl"
-                    p="8"
-                    h="100%"
-                    borderRadius="20px"
-                    bg="white"
+                <GridItem
+                    colSpan={1}
+                    rowSpan={2}
+                    sx={{
+                        "&::-webkit-scrollbar": {
+                            width: "7px",
+                            borderRadius: "8px",
+                            backgroundColor: `rgba(0, 0, 0, 0.1)`,
+                        },
+                        "&::-webkit-scrollbar-thumb": {
+                            backgroundColor: `#ffffff`,
+                        },
+                    }}
+                    style={{ overflowY: "scroll" }}
                 >
-                    {qualite === "good" && (
-                        <HStack>
-                            <Image h="150px" pr={4} src={QualityGood} />
-                            <Text>
-                                Vous pouvez boire l'eau du robinet sans
-                                problème.
-                            </Text>
-                        </HStack>
-                    )}
-                    {qualite === "bad" && (
-                        <HStack>
-                            <Image h="150px" pr={4} src={QualityBad} />
-                            <Text>
-                                La qualité de l'eau est mauvaise en ce moment.
-                            </Text>
-                        </HStack>
-                    )}
-                    {qualite === "medium" && (
-                        <HStack>
-                            <Image h="150px" pr={4} src={QualityMedium} />
-                            <Text>
-                                La qualité de l'eau est moyenne.
-                            </Text>
-                        </HStack>
-                    )}
-                </Box>
-            </GridItem>
+                    <Notifications />
+                </GridItem>
 
-            <GridItem colSpan={3} rowSpan={2}>
-                <Box
-                    boxShadow="xl"
-                    p="8"
-                    h="100%"
-                    borderRadius="20px"
-                    bg="white"
-                    mb={5}
-                >
-                    <Text>box stat</Text>
-                </Box>
-            </GridItem>
+                <GridItem>
+                    <Box
+                        boxShadow="xl"
+                        p="8"
+                        h="100%"
+                        borderRadius="20px"
+                        bg="white"
+                    >
+                        <VStack>
+                            <Text align="center">Détection des fuites</Text>
+                            <Switch
+                                size="lg"
+                                isChecked={detection && "isChecked"}
+                                onChange={toggleDetection}
+                            />
+                        </VStack>
+                    </Box>
+                </GridItem>
+
+                <GridItem colSpan={3} rowSpan={1}>
+                    <Heading as="h1" size="md" fontWeight="600">
+                        Qualité de l'eau
+                    </Heading>
+                </GridItem>
+
+                <GridItem colSpan={3} rowSpan={1}>
+                    <Heading as="h1" size="md" fontWeight="600">
+                        Statistiques
+                    </Heading>
+                </GridItem>
+
+                <GridItem colSpan={3} rowSpan={1}>
+                    <Box
+                        boxShadow="xl"
+                        p="8"
+                        h="100%"
+                        borderRadius="20px"
+                        bg="white"
+                    >
+                        {qualite === "good" && (
+                            <HStack>
+                                <Image h="150px" pr={4} src={QualityGood} />
+                                <Text>
+                                    Vous pouvez boire l'eau du robinet sans
+                                    problème.
+                                </Text>
+                            </HStack>
+                        )}
+                        {qualite === "bad" && (
+                            <HStack>
+                                <Image h="150px" pr={4} src={QualityBad} />
+                                <Text>
+                                    La qualité de l'eau est mauvaise en ce
+                                    moment.
+                                </Text>
+                            </HStack>
+                        )}
+                        {qualite === "medium" && (
+                            <HStack>
+                                <Image h="150px" pr={4} src={QualityMedium} />
+                                <Text>La qualité de l'eau est moyenne.</Text>
+                            </HStack>
+                        )}
+                    </Box>
+                </GridItem>
+
+                <GridItem colSpan={3} rowSpan={1}>
+                    <Box
+                        boxShadow="xl"
+                        p="8"
+                        h="100%"
+                        borderRadius="20px"
+                        bg="white"
+                        mb={5}
+                    >
+                        <Text>box stat</Text>
+                    </Box>
+                </GridItem>
+            </Grid>
         </>
     );
 }
