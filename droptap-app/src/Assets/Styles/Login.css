@@ -6,3 +6,6 @@
     background-size: cover ;
 }
 
+.errormsg{
+    color: red;
+}

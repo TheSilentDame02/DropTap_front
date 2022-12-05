@@ -1,7 +1,7 @@
-const Profile = () => {
-    return ( 
-        <img></img>
-     );
-}
+// const Profile = () => {
+//     return ( 
+//         <img></img>
+//      );
+// }
  
-export default Profile;
+// export default Profile;

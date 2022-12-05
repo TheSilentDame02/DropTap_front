@@ -11,7 +11,7 @@ import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
 import Accueil from "./Pages/Accueil";
 import "./Assets/Styles/App.css";
-import { Routes, Route } from "react-router-dom";
+//import { Routes, Route } from "react-router-dom";
 
 function App() {
     return (
@@ -30,9 +30,9 @@ function App() {
                     <GridItem colSpan={6} rowSpan={1}>
                         <Header/>
                     </GridItem>
-                    <Routes>
+                    {/* <Routes>
                         <Route path="/" element={<Accueil/>}/>
-                    </Routes>
+                    </Routes> */}
                 </Grid>
             </Box>
         </div>
