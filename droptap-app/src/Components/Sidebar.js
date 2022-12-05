@@ -53,12 +53,21 @@
 //     );
 // };
 
+<<<<<<< HEAD
 // function Sidebar() {
 //     return (
 //         <Box bg="#FFFFFF" h="100vh" py={4} px={5}>
 //             <Center mt="1rem" h="6rem">
 //                 <Logo height="70px"/>
 //             </Center>
+=======
+function Sidebar() {
+    return (
+        <Box w="15rem" h="auto" bg="#FFFFFF" py={4} px={2}>
+            <Center mt="1rem" h="6rem">
+                <Logo height="70px"/>
+            </Center>
+>>>>>>> 9e3a7fa653cbcd680e906923631254c651735570
 
 //             {LinkItems.map((link) => (
 //                 <NavItem key={link.name} icon={link.icon} path={link.path}>
