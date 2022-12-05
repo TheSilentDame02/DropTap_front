@@ -55,7 +55,7 @@ const NavItem = ({ name, icon, path, children, ...props }) => {
 
 function Sidebar() {
     return (
-        <Box bg="#FFFFFF" h="100vh" py={4} px={5}>
+        <Box w="15rem" h="auto" bg="#FFFFFF" py={4} px={2}>
             <Center mt="1rem" h="6rem">
                 <Logo height="70px"/>
             </Center>
