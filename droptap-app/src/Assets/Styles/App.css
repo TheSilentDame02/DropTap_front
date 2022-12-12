@@ -1,28 +1,35 @@
-
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 .App {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     /*background: linear-gradient(135deg, #d4f0ff , #f3faff);*/
-    background: #D0E4F5 url("../Images/bg.png") no-repeat fixed 0% 0%;
+    background: #d0e4f5 url("../Images/bg.png") no-repeat fixed 0% 0%;
     background-size: cover;
 }
 
 
-.app-glass{
+.app-glass {
     height: 95%;
     width: 95%;
-    margin:auto;
+    margin: auto;
     border-radius: 2rem;
     overflow-y: auto;
-    padding-right:8px;
-    background: rgba(255,255,255, 0.5);
+    padding-right: 8px;
+    background: rgba(255, 255, 255, 0.5);
 }
 /* what comes next to sidebar */
 
+::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
 
-
+::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 8px;
+}

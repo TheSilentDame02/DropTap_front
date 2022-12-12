@@ -1,12 +1,7 @@
 import {
-    Flex,
     Box,
     VStack,
     HStack,
-    Heading,
-    Text,
-    Grid,
-    GridItem,
 } from "@chakra-ui/react";
 import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
@@ -21,7 +16,7 @@ function App() {
                 <HStack h="100%" align="stretch">
                     <Sidebar />
 
-                    <VStack h="100%" align="start" spacing={2}>
+                    <VStack pl="16vw" h="100%" align="start">
                         <Box h="7rem">
                             <Header />
                         </Box>

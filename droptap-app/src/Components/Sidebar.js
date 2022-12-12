@@ -1,4 +1,4 @@
-import { Flex, Link, Box, Image, VStack, Text, Icon, Center } from "@chakra-ui/react";
+import { Flex,Box, Icon, Center } from "@chakra-ui/react";
 import React from "react";
 import {
     BiHome,
@@ -55,7 +55,7 @@ const NavItem = ({ name, icon, path, children, ...props }) => {
 
 function Sidebar() {
     return (
-        <Box w="15rem" h="auto" bg="#FFFFFF" py={4} px={2}>
+        <Box className="sidebar" w="15vw" h="95%" bg="#FFFFFF" py={4} px={2} position='fixed' borderLeftRadius="2rem">
             <Center mt="1rem" h="6rem">
                 <Logo height="70px"/>
             </Center>
