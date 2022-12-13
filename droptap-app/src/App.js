@@ -30,7 +30,7 @@ function App() {
                             <Routes>
                                 <Route path="/" element={<Accueil />} />
                                 <Route path="/rapport" element={<Rapport />} />
-                                <Route path="/settings" element={<Settings />}
+                                <Route path="/settings" element={<Settings />} />
                             </Routes>
                         </VStack>
                     </HStack>
