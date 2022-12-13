@@ -8,6 +8,7 @@ import Sidebar from "./Components/Sidebar";
 import Accueil from "./Pages/Accueil";
 import "./Assets/Styles/App.css";
 import { Routes, Route } from "react-router-dom";
+import Settings from "./Pages/Parametres";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                         {/* any page will fit here :) */}
                         <Routes>
                             <Route path="/" element={<Accueil />} />
+                            <Route path="/settings" element={<Settings/>} />
                         </Routes>
                     </VStack>
                 </HStack>
