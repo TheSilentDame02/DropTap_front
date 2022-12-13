@@ -12,10 +12,7 @@ import {
 import React from "react";
 import Notifications from "../Components/Notifications";
 import { useState } from "react";
-import {
-    CircularProgressbarWithChildren,
-    buildStyles,
-} from "react-circular-progressbar";
+import {    CircularProgressbarWithChildren} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import QualityGood from "../Assets/Images/quality-good.jpg";
 import QualityBad from "../Assets/Images/quality-bad.jpg";
@@ -103,7 +100,7 @@ function Accueil() {
     return (
         <>
             <Grid
-                mr={4}
+                mx={4}
                 mb={4}
                 templateColumns={"1fr 1fr 1fr 1fr 1fr 20rem"}
                 templateRows={"1rem 8rem 8rem 1rem 1fr"}
@@ -155,13 +152,13 @@ function Accueil() {
                 <GridItem>
                     <Box
                         boxShadow="xl"
-                        p="8"
+                        p="5"
                         h="100%"
                         borderRadius="20px"
                         bg="white"
                     >
                         <VStack>
-                            <Text>Robinet</Text>
+                            <Text fontSize="sm">Robinet</Text>
                             <Switch
                                 size="lg"
                                 isChecked={robinet && "isChecked"}
@@ -182,13 +179,15 @@ function Accueil() {
                 <GridItem>
                     <Box
                         boxShadow="xl"
-                        p="8"
+                        p="5"
                         h="100%"
                         borderRadius="20px"
                         bg="white"
                     >
                         <VStack>
-                            <Text align="center">Détection des fuites</Text>
+                            <Text fontSize="sm" align="center">
+                                Détection des fuites
+                            </Text>
                             <Switch
                                 size="lg"
                                 isChecked={detection && "isChecked"}

@@ -1,12 +1,7 @@
 import {
-    Flex,
     Box,
     VStack,
     HStack,
-    Heading,
-    Text,
-    Grid,
-    GridItem,
 } from "@chakra-ui/react";
 import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
@@ -15,6 +10,7 @@ import "./Assets/Styles/App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Rapport from "./Pages/Rapport";
+import Settings from "./Pages/Parametres";
 
 function App() {
     const success = true;
@@ -34,6 +30,7 @@ function App() {
                             <Routes>
                                 <Route path="/" element={<Accueil />} />
                                 <Route path="/rapport" element={<Rapport />} />
+                                <Route path="/settings" element={<Settings />}
                             </Routes>
                         </VStack>
                     </HStack>
