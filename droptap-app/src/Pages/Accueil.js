@@ -17,6 +17,9 @@ import "react-circular-progressbar/dist/styles.css";
 import QualityGood from "../Assets/Images/quality-good.jpg";
 import QualityBad from "../Assets/Images/quality-bad.jpg";
 import QualityMedium from "../Assets/Images/quality-medium.jpg";
+import BarChart from "../Components/BarChart";
+import { UserData } from '../Components/DayData';
+import { userData } from "./Rapport";
 
 function ProgressBar({ conso, seuil, titre, date }) {
     const strokeColor = conso / seuil > 1 ? `#F45B69` : `#55C2FF`;
@@ -80,6 +83,19 @@ function Accueil() {
     const toggleDetection = () => {
         setDetection((current) => !current);
     };
+
+    const [userData,setUserData] = useState({
+        labels: UserData.map((data) => data.hour),
+        datasets: [{
+            label: "Consommation d'eau",
+            data: UserData.map((data) => data.hourCons),
+            borderRadius: 1999,
+            backgroundColor: '#55C2FF',
+            barThickness: 10,
+            barPercentage: 0.5,
+    
+        }]
+    });
 
     return (
         <>
@@ -237,7 +253,9 @@ function Accueil() {
                         bg="white"
                         mb={5}
                     >
-                        <Text>box stat</Text>
+                    <Box h='100%' w='30vw'>
+                        <BarChart chartData={userData}/>
+                    </Box>
                     </Box>
                 </GridItem>
             </Grid>

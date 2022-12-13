@@ -1,0 +1,11 @@
+#bg{
+    background-image: url('../Images/bg.jpeg');
+    height: 100%;
+    background-position: left ;
+    background-repeat: no-repeat ;
+    background-size: cover ;
+}
+
+.errormsg{
+    color: red;
+}
