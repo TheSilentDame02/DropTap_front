@@ -21,7 +21,7 @@ function App() {
                     <HStack h="100%" align="stretch">
                         <Sidebar />
     
-                        <VStack h="100%" align="start" spacing={2}>
+                        <VStack pl="16vw" h="100%" align="start">
                             <Box h="7rem">
                                 <Header />
                             </Box>

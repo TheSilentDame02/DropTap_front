@@ -35,9 +35,9 @@ export default function Rapport(){
         <>
         <HStack>
             <Box 
-                w='55vw'
+                w='52vw'
                 h='100vh'
-                p={5}
+                
             >
                 <Flex flexDirection={'column'}>
                     <Heading as="h1" size="md" fontWeight="600" mb={5} >
@@ -80,7 +80,7 @@ export default function Rapport(){
                                 </HStack>
                                 <Text fontSize={12} fontWeight='bold' pl={'40px'} >70% of </Text>
                                 </HStack>
-                                <Progress value={80} colorScheme='twitter' width='full' borderRadius={20} />
+                                <Progress value={70} colorScheme='twitter' width='full' borderRadius={20} />
                                 <Text pt={5} fontSize={18} fontWeight='bold' >Estimated water bill: </Text>
                                 <HStack>
                                     <FaMoneyBillWave style={{color: "green",fontSize: "2em"}}/>
@@ -104,16 +104,17 @@ export default function Rapport(){
             </Box>
         </HStack>
         <Box 
-                w='55vw'
+                w='52vw'
                 h='100vh'
-                p={5}
+                pb='5'
+                
             >
             <Heading as="h1" size="md" fontWeight="600" mb={5} >
                         Quality tracker
             </Heading>    
             <Box boxShadow="xl"
                         p="8"
-                        h="100%"
+                        
                         borderRadius="20px"
                         bg="white">
                 <Tabs variant='soft-rounded' colorScheme='blue'>
