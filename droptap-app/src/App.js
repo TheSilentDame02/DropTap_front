@@ -30,7 +30,7 @@ function App() {
                         {/* any page will fit here :) */}
                         <Routes>
                             <Route path="/" element={<Accueil />} />
-                            <Route path="/Settings" element={<Settings/>} />
+                            <Route path="/settings" element={<Settings/>} />
                         </Routes>
                     </VStack>
                 </HStack>
