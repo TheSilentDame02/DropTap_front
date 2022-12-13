@@ -24,5 +24,13 @@
 }
 /* what comes next to sidebar */
 
+::-webkit-scrollbar{
+    width: 7px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
 
-
+::-webkit-scrollbar-thumb {
+    background-Color: #ffffff;
+    border-radius: 8px;
+}

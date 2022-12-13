@@ -3,17 +3,26 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
-import Login from "./Pages/Login/Login";
-//import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { extendTheme } from "@chakra-ui/react"
+
+
+const theme = extendTheme({
+    colors:{
+        brand: {
+            100: "#55C2FF",
+        },
+    }
+});
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    //<BrowserRouter>
-        <ChakraProvider>
-            <Login/>
-            {/* <App /> */}
+    <BrowserRouter>
+        <ChakraProvider theme={theme}>
+            <App />
         </ChakraProvider>
-    //</BrowserRouter>
+    </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

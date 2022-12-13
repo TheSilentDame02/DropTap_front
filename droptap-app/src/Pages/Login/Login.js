@@ -4,7 +4,7 @@ import { InputGroup, InputRightElement } from '@chakra-ui/react';
 import { BiShowAlt, BiHide } from 'react-icons/bi';
 import { ReactComponent as Logo } from '../../Assets/Images/logo.svg';
 import '../../Assets/Styles/Login.css';
-
+import { redirect } from 'react-router-dom';
 
 import React, { useEffect, useRef, useState } from "react";
 
@@ -31,16 +31,13 @@ export default function Login(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(login,password);
-        setLogin('');
-        setPassword('');
         setSuccess(true);
     }
 
     return (
         <>
         {
-            success ? (<h1>Welcome USER</h1>) : 
+            success ? (redirect("/"))   : 
         (
         <Center h='100vh'>
         <HStack spacing={0} >
