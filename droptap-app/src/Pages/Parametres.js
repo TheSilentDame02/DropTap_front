@@ -8,13 +8,38 @@ import Notifications from "../Components/Notifications";
 import { CiEdit } from "react-icons/ci";
 import { IoTrendingUp } from 'react-icons/io5';
 import '../Assets/Styles/Settings.css';
-import React from "react";
+import React, {useState} from "react";
+import Api from "../Services/api";
+
+
+
+
+
+
+
 
 const Settings = () => {
     // const { isOpen, onOpen, onClose } = useDisclosure();
     //Modal's function
     const { isOpen: isFirstModalOpen , onOpen: onFirstModalOpen, onClose: onFirstModalClose } = useDisclosure();
     const { isOpen: isSecondModalOpen , onOpen: onSecondModalOpen, onClose: onSecondModalClose } = useDisclosure();
+
+    const [seuilJour, setSeuilJour] = useState(100);
+    const [seuil, setSeuil] = useState('');
+    const [inputSeuil, setInputSeuil] = useState('');
+
+    Api.getSeuilByType("jour").then(response => {
+        setSeuilJour(response.data.valeur);
+        setInputSeuil(response.data.valeur);
+        setSeuil(response.data)
+    });
+
+
+    function Seuil(){
+        console.log("wa l3adaw");
+        Api.updateValeurSeuil(seuil.id,seuil.id,seuil.type, inputSeuil);
+    }
+
     //Password Input Variables;
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
@@ -101,7 +126,7 @@ const Settings = () => {
                         </Tr>
                         <Tr>
                             <Td>Seuil de consommation</Td>
-                            <Td>200L <Button bg="transparent" onClick={onSecondModalOpen}><CiEdit /></Button>
+                            <Td>{seuilJour}L <Button bg="transparent" onClick={onSecondModalOpen}><CiEdit /></Button>
                             <Modal blockScrollOnMount={false} isOpen={isSecondModalOpen} onClose={onSecondModalClose} closeOnOverlayClick={false} >
         <ModalOverlay />
         <ModalContent>
@@ -110,7 +135,7 @@ const Settings = () => {
           <ModalBody>
           <FormControl>
   <FormLabel>Seuil de consommation</FormLabel>
-  <Input type='text' placeholder='200' />
+  <Input type='text' placeholder={seuilJour} onChange={(e)=>setInputSeuil(e.target.value)} />
   <FormHelperText>Veuillez entrez la consommation du mois</FormHelperText>
 </FormControl>
           </ModalBody>
@@ -118,7 +143,7 @@ const Settings = () => {
             <Button colorScheme='blue' mr={3} onClick={onSecondModalClose}>
               Discard
             </Button>
-            <Button variant='ghost'>Save</Button>
+            <Button variant='ghost' >Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

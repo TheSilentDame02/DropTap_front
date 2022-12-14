@@ -20,6 +20,7 @@ import QualityMedium from "../Assets/Images/quality-medium.jpg";
 import BarChart from "../Components/BarChart";
 import { UserData } from '../Components/DayData';
 import { userData } from "./Rapport";
+import Api from "../Services/api";
 
 function ProgressBar({ conso, seuil, titre, date }) {
     const strokeColor = conso / seuil > 1 ? `#F45B69` : `#55C2FF`;
@@ -68,8 +69,34 @@ function Accueil() {
         year: "numeric",
     });
 
-    const [consoJour, setConsoJour] = useState(400);
-    const [consoMois, setConsoMois] = useState(6750);
+
+    const [somme, setSomme]=useState(0);
+    Api.getConsommations().then(response => {
+        let s=0;
+        response.data.forEach(data => s += data.quantite);
+        setSomme(s);
+        setConsoJour(s);
+        setConsoMois(s);
+    });
+
+    Api.getSeuilByType("jour").then(response => {
+        setSeuilJour(response.data.valeur);
+    });
+
+    Api.getSeuilByType("mois").then(response => {
+        setSeuilMois(response.data.valeur);
+    });
+
+
+
+
+
+
+
+
+
+    const [consoJour, setConsoJour] = useState(somme);
+    const [consoMois, setConsoMois] = useState(somme);
     const [seuilMois, setSeuilMois] = useState(9000);
     const [seuilJour, setSeuilJour] = useState(Math.floor(seuilMois / 30));
     const [robinet, setRobinet] = useState(true);

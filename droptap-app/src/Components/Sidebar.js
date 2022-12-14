@@ -13,13 +13,17 @@ const LinkItems = [
     { name: "Accueil", icon: BiHome, path: "/" },
     { name: "Rapport", icon: BiBarChartSquare, path: "/rapport" },
     { name: "Paramètres", icon: BiSliderAlt, path: "/settings" },
-    { name: "Se déconnecter", icon: BiLogOut, path: "logout" },
+    { name: "Se déconnecter", icon: BiLogOut, path: "/logout" },
 ];
 
 const NavItem = ({ name, icon, path, children, ...props }) => {
     return (
+
+
         <NavLink
+
             to={path}
+
             style={{ textDecoration: "none" }}
             _focus={{ boxShadow: "none" }}
         >

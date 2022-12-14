@@ -11,38 +11,51 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Rapport from "./Pages/Rapport";
 import Settings from "./Pages/Parametres";
+import Logout from "./Pages/Logout";
+import {render} from "react-dom";
 
 function App() {
-    const success = true;
-    if(success==true){
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = JSON.parse(localStorage.getItem('token'));
+
+    if (user && token[`jwt-token`] ){
         return (
             <div className="App">
+
                 <Box className="app-glass">
-                    <HStack h="100%" align="stretch">
-                        <Sidebar />
-    
-                        <VStack pl="16vw" h="100%" align="start">
-                            <Box h="7rem">
-                                <Header />
-                            </Box>
-    
-                            {/* any page will fit here :) */}
-                            <Routes>
-                                <Route path="/" element={<Accueil />} />
-                                <Route path="/rapport" element={<Rapport />} />
-                                <Route path="/settings" element={<Settings />} />
-                            </Routes>
-                        </VStack>
-                    </HStack>
+
+                        <HStack h="100%" align="stretch">
+                            <Sidebar />
+
+                            <VStack pl="16vw" h="100%" align="start">
+                                <Box h="7rem">
+                                    <Header />
+
+                                </Box>
+
+                                {/* any page will fit here :) */}
+                                <Routes>
+                                    <Route path="/" element={<Accueil />} />
+                                    <Route path="/rapport" element={<Rapport />} />
+                                    <Route path="/settings" element={<Settings />} />
+                                    <Route path="/logout" element={<Logout />} />
+                                </Routes>
+                            </VStack>
+                        </HStack>
+
                 </Box>
-            </div>
-        );
-    }
-    else{
+
+            </div>);
+    }else {
         return (
-            <Login />
-        );
+            <div className="App">
+                <Login />
+            </div>
+        )
     }
+
+
 }
 
 export default App;
