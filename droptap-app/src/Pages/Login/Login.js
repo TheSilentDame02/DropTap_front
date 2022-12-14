@@ -7,7 +7,7 @@ import '../../Assets/Styles/Login.css';
 import { Navigate } from 'react-router-dom';
 
 import React, { useEffect, useRef, useState } from "react";
-import AuthService from "../../Services/auth.service";
+import AuthService from "../../services/auth.service";
 
 export default function Login(){
     const loginRef = useRef();

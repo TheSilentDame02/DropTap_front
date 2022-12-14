@@ -20,7 +20,7 @@ import QualityMedium from "../Assets/Images/quality-medium.jpg";
 import BarChart from "../Components/BarChart";
 import { UserData } from '../Components/DayData';
 import { userData } from "./Rapport";
-import Api from "../Services/api";
+import Api from "../services/api";
 
 function ProgressBar({ conso, seuil, titre, date }) {
     const strokeColor = conso / seuil > 1 ? `#F45B69` : `#55C2FF`;

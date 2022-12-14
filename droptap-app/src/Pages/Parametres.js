@@ -9,7 +9,7 @@ import { CiEdit } from "react-icons/ci";
 import { IoTrendingUp } from 'react-icons/io5';
 import '../Assets/Styles/Settings.css';
 import React, {useState} from "react";
-import Api from "../Services/api";
+import Api from "../services/api";
 
 
 
