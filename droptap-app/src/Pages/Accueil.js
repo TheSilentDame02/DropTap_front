@@ -9,7 +9,7 @@ import {
     Text,
     Grid,
 } from "@chakra-ui/react";
-import React from "react";
+import React, {useEffect} from "react";
 import Notifications from "../Components/Notifications";
 import { useState, useEffect } from "react";
 import {    CircularProgressbarWithChildren} from "react-circular-progressbar";
@@ -21,6 +21,37 @@ import BarChart from "../Components/BarChart";
 import { UserData } from '../Components/DayData';
 import { userData } from "./Rapport";
 import Api from "../services/api";
+
+
+let dataRobinet ={};
+
+Api.getRobinets().then(response => {
+    response.data.forEach(data => {;
+        dataRobinet = data;
+
+    });
+});
+
+let dataConsommation=0;
+let dataConsommationJour=0;
+let dataStatistique;
+
+Api.getConsommations().then(response => {
+    let dateAuj = ((new Date()).toString().split(' '))[2];
+    dataStatistique = response.data;
+    response.data.forEach(data => {
+        dataConsommation += data.quantite;
+        let jourConsommation = (((data.createdAt.toString().split('T'))[0]).split('-'))[2];
+        if (dateAuj == jourConsommation){
+            dataConsommationJour += data.quantite;
+        }
+    });
+});
+
+let dataSeuil;
+Api.getSeuilByType("jour").then(response => {
+    dataSeuil = response.data.valeur
+});
 
 
 
@@ -74,22 +105,6 @@ function Accueil() {
     });
 
 
-    const [somme, setSomme]=useState(0);
-    Api.getConsommations().then(response => {
-        let s=0;
-        response.data.forEach(data => s += data.quantite);
-        setSomme(s);
-        setConsoJour(s);
-        setConsoMois(s);
-    });
-
-    Api.getSeuilByType("jour").then(response => {
-        setSeuilJour(response.data.valeur);
-    });
-
-    Api.getSeuilByType("mois").then(response => {
-        setSeuilMois(response.data.valeur);
-    });
 
     
     let last_qualite = "";
@@ -113,28 +128,14 @@ function Accueil() {
 
 
 
-    const [consoJour, setConsoJour] = useState(somme);
-    const [consoMois, setConsoMois] = useState(somme);
-    const [seuilMois, setSeuilMois] = useState(9000);
-    const [seuilJour, setSeuilJour] = useState(Math.floor(seuilMois / 30));
-    const [robinet, setRobinet] = useState(true);
-    const [detection, setDetection] = useState(true);
-    const [last, setLast] = useState();
-    const [qualite, setQualite] = useState("good");
 
 
 
-    
-
-
-    const toggleRobinet = () => {
-        setRobinet((current) => !current);
-    };
-
-    const toggleDetection = () => {
-        setDetection((current) => !current);
-    };
-
+    const [consoJour, setConsoJour] = useState(0);
+    const [consoMois, setConsoMois] = useState(0);
+    const [seuilMois, setSeuilMois] = useState(0);
+    const [seuilJour, setSeuilJour] = useState(0);
+    const [robinet, setRobinet] = useState(false);
     const [userData,setUserData] = useState({
         labels: UserData.map((data) => data.hour),
         datasets: [{
@@ -144,9 +145,101 @@ function Accueil() {
             backgroundColor: '#55C2FF',
             barThickness: 10,
             barPercentage: 0.5,
-    
+
         }]
     });
+
+    useEffect(() => {
+        setTimeout(() => {
+            setRobinet(dataRobinet.etat);
+            setSeuilJour(dataSeuil);
+            setSeuilMois(dataSeuil * 30);
+            setConsoJour(dataConsommationJour);
+            setConsoMois(dataConsommation);
+            let heureConsommation =[];
+            let quantiteConsomme =[];
+            let jourStatistique = ((new Date()).toString().split(' '))[2];
+
+            dataStatistique.forEach(data => {
+                let jourConsommation = (((data.createdAt.toString().split('T'))[0]).split('-'))[2];
+                if (jourConsommation==jourStatistique){
+                    heureConsommation.push((((data.createdAt.toString().split('T'))[1]).split(':'))[0]);
+                    quantiteConsomme.push(data.quantite);
+                }
+
+            });
+
+            for (let i = 1; i < quantiteConsomme.length; i++) {
+                let x = quantiteConsomme[i];
+                let j = i - 1;
+                let x0 = heureConsommation[i];
+                while (j >= 0 && heureConsommation[j] > x0) {
+                    quantiteConsomme[j + 1] = quantiteConsomme[j];
+                    heureConsommation[j + 1] = heureConsommation[j];
+                    j--;
+                }
+                quantiteConsomme[j + 1] = x;
+                heureConsommation[j + 1] = x0;
+            }
+
+            setUserData({
+                labels: heureConsommation,
+                datasets: [{
+                    label: "Consommation d'eau",
+                    data: quantiteConsomme,
+                    borderRadius: 1999,
+                    backgroundColor: '#55C2FF',
+                    barThickness: 10,
+                    barPercentage: 0.5,
+
+                }]
+            });
+        }, 1000);
+    }, []);
+
+    const [detection, setDetection] = useState(false);
+    const [qualite, setQualite] = useState("good");
+
+    const toggleRobinet = () => {
+        setRobinet((current) => !current);
+        dataRobinet.etat = (!dataRobinet.etat);
+        Api.updateEtatRobinet(dataRobinet.id,dataRobinet);
+    };
+
+    const toggleDetection = () => {
+        if (robinet){
+            setDetection((current) => !current);
+        }
+        if (!detection && robinet){
+            let heureDetection = ((new Date()).toString().split(' '))[4];
+            let jourDetection = ((new Date()).toString().split(' '))[2];
+            setTimeout(() => {
+
+                Api.getConsommations().then(response => {
+
+                    response.data.forEach(data => {
+                        let heureConsommation = (data.createdAt.toString().split('T'))[1];
+                        let jourConsommation = (((data.createdAt.toString().split('T'))[0]).split('-'))[2];
+
+
+                        if ((heureDetection <= heureConsommation) && (data.quantite!=0) && (jourConsommation==jourDetection)){
+                            toggleRobinet();
+                        }
+                    });
+                });
+            }, 8000);
+
+        }
+
+        setTimeout(() => {
+            setDetection(false);
+        },10000)
+
+
+
+    };
+
+
 
     return (
         <>
