@@ -6,6 +6,33 @@ import { IoAlertCircle } from "react-icons/io5";
 function NotificationItem() {
     const NotificationList = [
         {
+            title: "A leak has been detected.",
+            type: "red",
+            description: "Please take action as soon as possible.",
+            date: "Tuesay, November 12 - 13h00",
+        },
+
+        {
+            title: "Water quality has dropped below the threshold.",
+            type: "yellow",
+            description: "",
+            date: "Tuesay, November 12 - 13h00",
+        },
+        {
+            title: "Water quality has dropped below the threshold.",
+            type: "yellow",
+            description: "",
+            date: "Tuesay, November 12 - 13h00",
+        },
+        {
+            title: "Water quality has dropped below the threshold.",
+            type: "yellow",
+            description: "",
+            date: "Tuesay, November 12 - 13h00",
+        }
+    ];
+    const NotificationListFr = [
+        {
             title: "Une fuite a été détectée.",
             type: "red",
             description: "Veuillez intervenir au plus tôt possible.",
@@ -79,7 +106,7 @@ function NotificationItem() {
                                 align="right"
                                 mt={2}
                             >
-                                Marquer comme lu
+                                Mark as read
                             </Text>
                         </Box>
                     </HStack>

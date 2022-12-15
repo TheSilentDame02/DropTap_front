@@ -21,7 +21,7 @@ function Header() {
                 mr="5"
             /> */}
                 <Heading size="lg" fontWeight="500">
-                    Bonjour, User
+                    Hello, User
                 </Heading>
                 <Clock />
             </Flex>

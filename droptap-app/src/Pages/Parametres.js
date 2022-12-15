@@ -69,7 +69,7 @@ const Settings = () => {
         <Grid templateColumns='repeat(9, 1fr)' templateRows='repeat(20, 1fr)' gap={4} >
             <GridItem colSpan={6} rowSpan={1}>
                 <Heading as="h1" size="md" fontWeight="600">
-                    Parametres
+                    Settings
                 </Heading>
             </GridItem>
             <GridItem colSpan={3} rowSpan={1}>
@@ -82,7 +82,7 @@ const Settings = () => {
                 <Box w='100%' p={8} bg="white" borderRadius="20px" >
                     <div className='profile'>
                     <Heading as="h3" size="sm" fontWeight="600">
-                    Nom Prenom/Code du produit
+                    First Name Last Name/Product code
                 </Heading>
                 <Text>E-mail</Text>
                 {/* Modification des Parametres */}
@@ -96,12 +96,12 @@ const Settings = () => {
           <ModalBody>
             {/* Formulaire de modification */}
           <FormControl>
-          <FormLabel>Code Produit</FormLabel>
+          <FormLabel>Product code</FormLabel>
   <Input type='text'  value={"qwert12345678"} isDisabled={true}/>
-  <FormHelperText>Code de votre produit il n'est pas modifiable</FormHelperText><br/>
+  <FormHelperText>Your product code. It is not changeable</FormHelperText><br/>
   <FormLabel>E-mail</FormLabel>
   <Input type='text' placeholder='E-mail'/>
-  <FormHelperText>Votre email sera utilise pour la recuperation de votre mot de passe</FormHelperText><br/>
+  <FormHelperText>Your email will be used to reset your password.</FormHelperText><br/>
   <FormLabel>Password</FormLabel>
   <InputGroup size='md'>
   <Input
@@ -115,7 +115,7 @@ const Settings = () => {
         </Button>
       </InputRightElement>
       </InputGroup>
-  <FormHelperText>Modifier le mot de passe</FormHelperText>
+  <FormHelperText>Change password</FormHelperText>
 </FormControl>
           </ModalBody>
           <ModalFooter>
@@ -132,30 +132,30 @@ const Settings = () => {
                     </div>
                     <Table>
                     <Heading as="h1" size="md" fontWeight="600">
-                    Parametres technique
+                    Technical settings
                 </Heading>
                 <br/>
                         <Tr>
-                            <Td>Detection de fuite</Td>
+                            <Td>Leak detection</Td>
                             <Td><Switch></Switch></Td>
                         </Tr>
                         <Tr>
-                            <Td>Remote-Robinet</Td>
+                            <Td>Water shutoff</Td>
                             <Td><Switch></Switch></Td>
                         </Tr>
                         <Tr>
-                            <Td>Seuil de consommation</Td>
+                            <Td>Consumption limit</Td>
                             <Td>{seuilJour}L <Button bg="transparent" onClick={onSecondModalOpen}><CiEdit /></Button>
                             <Modal blockScrollOnMount={false} isOpen={isSecondModalOpen} onClose={onSecondModalClose} closeOnOverlayClick={false} >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Seuil de Consommation</ModalHeader>
+          <ModalHeader>Consumption limit</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
           <FormControl>
-  <FormLabel>Seuil de consommation</FormLabel>
+  <FormLabel>Consumption limit</FormLabel>
   <Input type='text' placeholder={seuilJour} onChange={(e)=>setInputSeuil(e.target.value)} />
-  <FormHelperText>Veuillez entrez la consommation du mois</FormHelperText>
+  <FormHelperText>Please set your daily consumption limit</FormHelperText>
 </FormControl>
           </ModalBody>
           <ModalFooter>
@@ -169,32 +169,32 @@ const Settings = () => {
                             </Td>
                         </Tr>
                         <br/>
-                        <Heading as="h1" size="md" fontWeight="600">Parametres de Notifications</Heading>
+                        <Heading as="h1" size="md" fontWeight="600">Notification settings</Heading>
                 <br/>
                 <Tr>
-                            <Td>Alerte de fuite</Td>
+                            <Td>Leak alert</Td>
                             <Td><Switch></Switch></Td>
                         </Tr>
                         <Tr>
-                            <Td>Alerte de seuil</Td>
+                            <Td>Consumption limit alert</Td>
                             <Td><Switch></Switch></Td>
                         </Tr>
                         <Tr>
-                            <Td>Alerte qualite</Td>
+                            <Td>Water quality alert</Td>
                             <Td><Switch></Switch></Td>
                         </Tr><br/>
                         <Heading as="h1" size="md" fontWeight="600">General</Heading>
                 <br/>
                 <Tr>
-                    <Td>Contactez-nous</Td>
+                    <Td>Contact us</Td>
                     <Td></Td>
                     </Tr>
                         <Tr>
-                            <Td>Termes et conditions</Td>
+                            <Td>Terms and conditions</Td>
                             <Td></Td>
                         </Tr>
                         <Tr>
-                            <Td>Politique de confidentialite</Td>
+                            <Td>Privacy policy</Td>
                             <Td></Td>
                         </Tr>
                     </Table>
