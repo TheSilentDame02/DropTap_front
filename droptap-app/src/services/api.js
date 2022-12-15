@@ -79,20 +79,16 @@ class Api {
                 headers: authHeader()
             })}
 
-    updateEtatRobinet(id,idRobinet, etat, idCompteur, idAnalyseur, idSeuil, type, valeur) {
+    updateEtatRobinet(id,robinet) {
         return axios
             .put(API_URL + "updateEtatRobinet/"+id, {
-                params: {
-                    idRobinet,
-                    etat,
-                    idCompteur,
-                    idAnalyseur,
-                    idSeuil,
-                    type,
-                    valeur
-                },
-                headers: authHeader()
-            })}
+                    id: robinet.id,
+                    etat: robinet.etat,
+                    analyseur: robinet.analyseur,
+                    compteur: robinet.compteur,
+                    seuil: robinet.seuil
+            },
+                {headers: authHeader()})}
 
     getRobinetById(id) {
         return axios
