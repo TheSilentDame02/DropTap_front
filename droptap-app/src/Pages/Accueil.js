@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import Notifications from "../Components/Notifications";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {    CircularProgressbarWithChildren} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import QualityGood from "../Assets/Images/quality-good.jpg";
@@ -20,7 +20,9 @@ import QualityMedium from "../Assets/Images/quality-medium.jpg";
 import BarChart from "../Components/BarChart";
 import { UserData } from '../Components/DayData';
 import { userData } from "./Rapport";
-import Api from "../Services/api";
+import Api from "../services/api";
+
+
 
 function ProgressBar({ conso, seuil, titre, date }) {
     const strokeColor = conso / seuil > 1 ? `#F45B69` : `#55C2FF`;
@@ -59,6 +61,8 @@ function ProgressBar({ conso, seuil, titre, date }) {
 
 function Accueil() {
     const date = new Date();
+    
+
     const today = date.toLocaleString("fr-FR", {
         weekday: "long",
         day: "numeric",
@@ -87,11 +91,25 @@ function Accueil() {
         setSeuilMois(response.data.valeur);
     });
 
+    
+    let last_qualite = "";
+    useEffect(() => {
+        let qualites = [];
 
-
-
-
-
+        Api.sortQualite(0,1,"createdAt","desc").then((response)=>{
+        qualites = response.data.content;
+        console.log(qualites[0]);
+        qualites[0].qualite = 29;
+        if(qualites[0].qualite<10){
+            console.log("good");
+            setQualite("good");
+        }else if(qualites[0].qualite>=10 && qualites[0].qualite<30){
+            setQualite("medium");
+        }else{
+            setQualite("bad");
+        }
+    });
+    }, []);
 
 
 
@@ -101,7 +119,13 @@ function Accueil() {
     const [seuilJour, setSeuilJour] = useState(Math.floor(seuilMois / 30));
     const [robinet, setRobinet] = useState(true);
     const [detection, setDetection] = useState(true);
+    const [last, setLast] = useState();
     const [qualite, setQualite] = useState("good");
+
+
+
+    
+
 
     const toggleRobinet = () => {
         setRobinet((current) => !current);
