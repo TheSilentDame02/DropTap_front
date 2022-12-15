@@ -22,7 +22,7 @@ export default function Rapport(){
     const [userData,setUserData] = useState({
         labels: UserData.map((data) => data.hour),
         datasets: [{
-            label: "Consommation d'eau",
+            label: "Water usage",
             data: UserData.map((data) => data.hourCons),
             borderRadius: 1999,
             backgroundColor: '#55C2FF',

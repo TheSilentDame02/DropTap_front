@@ -10,10 +10,10 @@ import { NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from '../Assets/Images/logo.svg';
 
 const LinkItems = [
-    { name: "Accueil", icon: BiHome, path: "/" },
-    { name: "Rapport", icon: BiBarChartSquare, path: "/rapport" },
-    { name: "Paramètres", icon: BiSliderAlt, path: "/settings" },
-    { name: "Se déconnecter", icon: BiLogOut, path: "/logout" },
+    { name: "Dashboard", icon: BiHome, path: "/" },
+    { name: "Statistics", icon: BiBarChartSquare, path: "/rapport" },
+    { name: "Settings", icon: BiSliderAlt, path: "/settings" },
+    { name: "Logout", icon: BiLogOut, path: "/logout" },
 ];
 
 const NavItem = ({ name, icon, path, children, ...props }) => {
