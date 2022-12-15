@@ -8,6 +8,7 @@ import {
     Heading,
     Text,
     Grid,
+    Center,
 } from "@chakra-ui/react";
 import React from "react";
 import Notifications from "../Components/Notifications";
@@ -20,6 +21,7 @@ import QualityMedium from "../Assets/Images/quality-medium.jpg";
 import BarChart from "../Components/BarChart";
 import { UserData } from '../Components/DayData';
 import { userData } from "./Rapport";
+import LineChart from "../Components/LineChart";
 
 function ProgressBar({ conso, seuil, titre, date }) {
     const strokeColor = conso / seuil > 1 ? `#F45B69` : `#55C2FF`;
@@ -251,11 +253,16 @@ function Accueil() {
                         h="100%"
                         borderRadius="20px"
                         bg="white"
-                        mb={5}
+                        
                     >
-                    <Box h='100%' w='30vw'>
-                        <BarChart chartData={userData}/>
+                    <Center>
+                    <Box  width='50%' height='90%' mr='2'>
+                        <BarChart chartData={userData} />
                     </Box>
+                    <Box width='50%' height='90%'>
+                        <LineChart />
+                    </Box>
+                    </Center>
                     </Box>
                 </GridItem>
             </Grid>
