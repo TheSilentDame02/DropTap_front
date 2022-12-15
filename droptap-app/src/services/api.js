@@ -31,14 +31,14 @@ class Api {
                 headers: authHeader()
             })}
 
-    updateValeurSeuil(id,idSeuil, type, valeur) {
+    updateValeurSeuil(id,object) {
         return axios
             .put(API_URL + "updateValeurSeuil/"+id, {
-                params: {
-                    idSeuil,
-                    type,
-                    valeur
-                },
+                id:object.id,
+                type:object.type,
+                valeur:object.valeur
+            },
+            {
                 headers: authHeader()
             })}
 

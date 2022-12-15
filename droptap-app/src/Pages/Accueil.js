@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React, {useEffect} from "react";
 import Notifications from "../Components/Notifications";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {    CircularProgressbarWithChildren} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import QualityGood from "../Assets/Images/quality-good.jpg";
@@ -21,6 +21,7 @@ import BarChart from "../Components/BarChart";
 import { UserData } from '../Components/DayData';
 import { userData } from "./Rapport";
 import Api from "../services/api";
+
 
 let dataRobinet ={};
 
@@ -51,6 +52,7 @@ let dataSeuil;
 Api.getSeuilByType("jour").then(response => {
     dataSeuil = response.data.valeur
 });
+
 
 
 function ProgressBar({ conso, seuil, titre, date }) {
@@ -90,6 +92,8 @@ function ProgressBar({ conso, seuil, titre, date }) {
 
 function Accueil() {
     const date = new Date();
+    
+
     const today = date.toLocaleString("fr-FR", {
         weekday: "long",
         day: "numeric",
@@ -102,11 +106,25 @@ function Accueil() {
 
 
 
+    
+    let last_qualite = "";
+    useEffect(() => {
+        let qualites = [];
 
-
-
-
-
+        Api.sortQualite(0,1,"createdAt","desc").then((response)=>{
+        qualites = response.data.content;
+        console.log(qualites[0]);
+        qualites[0].qualite = 29;
+        if(qualites[0].qualite<10){
+            console.log("good");
+            setQualite("good");
+        }else if(qualites[0].qualite>=10 && qualites[0].qualite<30){
+            setQualite("medium");
+        }else{
+            setQualite("bad");
+        }
+    });
+    }, []);
 
 
 

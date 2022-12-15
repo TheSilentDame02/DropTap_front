@@ -3,46 +3,69 @@ import { Box, Grid, GridItem ,Table,Td,Tr,Switch,Heading,Button,Modal,ModalOverl
     FormErrorMessage,
     FormHelperText,
 Input,Text,
-InputRightElement,InputGroup} from '@chakra-ui/react'
+InputRightElement,InputGroup, effect} from '@chakra-ui/react'
 import Notifications from "../Components/Notifications";
 import { CiEdit } from "react-icons/ci";
 import { IoTrendingUp } from 'react-icons/io5';
 import '../Assets/Styles/Settings.css';
-import React, {useState} from "react";
-import Api from "../Services/api";
+import React, {useState, useEffect, useCallback} from "react";
+import Api from "../services/api";
 
 
+let data={}
 
+Api.getSeuilByType("jour").then((response)=>{
+  data = response.data; 
+});
 
-
+function Seuil(object, inputseuil){
+  object.valeur = inputseuil;
+  Api.updateValeurSeuil(object.id, object);
+}
 
 
 
 const Settings = () => {
     // const { isOpen, onOpen, onClose } = useDisclosure();
     //Modal's function
+
+    useEffect(() => {
+      console.log("update");
+    }, []);
+    
+
     const { isOpen: isFirstModalOpen , onOpen: onFirstModalOpen, onClose: onFirstModalClose } = useDisclosure();
     const { isOpen: isSecondModalOpen , onOpen: onSecondModalOpen, onClose: onSecondModalClose } = useDisclosure();
 
-    const [seuilJour, setSeuilJour] = useState(100);
-    const [seuil, setSeuil] = useState('');
-    const [inputSeuil, setInputSeuil] = useState('');
+    
+    
+    console.log(data);
+    const [seuilJour, setSeuilJour] = useState(data.valeur);
+    const [newSeuil, setNewSeuil] = useState(data);
+    const [inputSeuil, setInputSeuil] = useState(0);
 
-    Api.getSeuilByType("jour").then(response => {
-        setSeuilJour(response.data.valeur);
-        setInputSeuil(response.data.valeur);
-        setSeuil(response.data)
-    });
-
-
-    function Seuil(){
-        console.log("wa l3adaw");
-        Api.updateValeurSeuil(seuil.id,seuil.id,seuil.type, inputSeuil);
+    const [state, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+    console.log("render");
+    
+    function handleSave(){
+      Seuil(newSeuil, inputSeuil);
+      setSeuilJour(inputSeuil);
+      onSecondModalClose();
     }
 
+    // useEffect(() => {
+    //   Api.getSeuilByType("jour").then(response => {
+    //     setSeuilJour(response.data.valeur);
+    //     setInputSeuil(response.data.valeur);
+    //     setSeuil(response.data)
+    // });
+    // });
+    
+
     //Password Input Variables;
-    const [show, setShow] = React.useState(false)
-    const handleClick = () => setShow(!show)
+    const [show, setShow] = React.useState(false);
+    const handleClick = () => setShow(!show);
     return ( 
         <>
         <br></br>
@@ -143,7 +166,7 @@ const Settings = () => {
             <Button colorScheme='blue' mr={3} onClick={onSecondModalClose}>
               Discard
             </Button>
-            <Button variant='ghost' >Save</Button>
+            <Button variant='ghost' onClick={()=>handleSave()} >Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
