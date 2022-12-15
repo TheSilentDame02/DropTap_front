@@ -22,7 +22,7 @@ const Settings = () => {
         <>
         <br></br>
         {/* Grid */}
-        <Grid templateColumns='repeat(9, 1fr)' templateRows='repeat(20, 1fr)' gap={4} >
+        <Grid templateColumns='repeat(9, 1fr)' templateRows='repeat(20, 1fr)' w="100%" gap={4} >
             <GridItem colSpan={6} rowSpan={1}>
                 <Heading as="h1" size="md" fontWeight="600">
                     Parametres
