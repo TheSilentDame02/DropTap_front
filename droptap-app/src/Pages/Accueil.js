@@ -113,7 +113,6 @@ function Accueil() {
         Api.sortQualite(0,1,"createdAt","desc").then((response)=>{
         qualites = response.data.content;
         console.log(qualites[0]);
-        qualites[0].qualite = 29;
         if(qualites[0].qualite<10){
             setQualite("good");
         }else if(qualites[0].qualite>=10 && qualites[0].qualite<30){
