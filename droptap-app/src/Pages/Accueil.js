@@ -39,10 +39,10 @@ Api.getConsommations().then(response => {
     let dateAuj = ((new Date()).toString().split(' '))[2];
     dataStatistique = response.data;
     response.data.forEach(data => {
-        dataConsommation += data.quantite;
+        dataConsommation += data.debit;
         let jourConsommation = (((data.createdAt.toString().split('T'))[0]).split('-'))[2];
         if (dateAuj == jourConsommation){
-            dataConsommationJour += data.quantite;
+            dataConsommationJour += data.debit;
         }
     });
 });
@@ -166,7 +166,7 @@ function Accueil() {
                 if (jourConsommation==jourStatistique){
                     for (let i=0; i<24; i++){
                         if ((statistiqueConsommation[i][0])==(((data.createdAt.toString().split('T'))[1]).split(':'))[0]){
-                            statistiqueConsommation[i][1] += data.quantite;
+                            statistiqueConsommation[i][1] += data.debit;
                         }
                     }
                 }
@@ -218,7 +218,7 @@ function Accueil() {
                         let jourConsommation = (((data.createdAt.toString().split('T'))[0]).split('-'))[2];
 
 
-                        if ((heureDetection <= heureConsommation) && (data.quantite!=0) && (jourConsommation==jourDetection)){
+                        if ((heureDetection <= heureConsommation) && (data.debit!=0) && (jourConsommation==jourDetection)){
                             toggleRobinet();
                         }
                     });
@@ -265,7 +265,7 @@ function Accueil() {
                         bg="white"
                     >
                         <ProgressBar
-                            conso={consoJour}
+                            conso={(consoJour).toFixed(2)}
                             seuil={seuilJour}
                             titre="Today"
                             date={today}
@@ -282,7 +282,7 @@ function Accueil() {
                         bg="white"
                     >
                         <ProgressBar
-                            conso={consoMois}
+                            conso={(consoMois).toFixed(2)}
                             seuil={seuilMois}
                             titre="This month"
                             date={thisMonth}
