@@ -30,7 +30,11 @@ const Settings = () => {
     //Modal's function
 
     useEffect(() => {
-      console.log("update");
+        setTimeout(()=>{
+            setSeuilJour(data.valeur);
+            setNewSeuil(data);
+        },1000)
+
     }, []);
     
 
@@ -39,28 +43,20 @@ const Settings = () => {
 
     
     
-    console.log(data);
-    const [seuilJour, setSeuilJour] = useState(data.valeur);
+    const [seuilJour, setSeuilJour] = useState(0);
     const [newSeuil, setNewSeuil] = useState(data);
     const [inputSeuil, setInputSeuil] = useState(0);
 
     const [state, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
-    console.log("render");
-    
+
     function handleSave(){
       Seuil(newSeuil, inputSeuil);
       setSeuilJour(inputSeuil);
       onSecondModalClose();
     }
 
-    // useEffect(() => {
-    //   Api.getSeuilByType("jour").then(response => {
-    //     setSeuilJour(response.data.valeur);
-    //     setInputSeuil(response.data.valeur);
-    //     setSeuil(response.data)
-    // });
-    // });
+
     
 
     //Password Input Variables;
