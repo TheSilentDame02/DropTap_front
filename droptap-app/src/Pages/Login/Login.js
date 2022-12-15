@@ -89,7 +89,7 @@ export default function Login(){
                     value={password} 
                     onChange={(e)=>setPassword(e.target.value)}
                     type={show ? 'text' : 'password'} 
-                    placeholder='Mot de passe' variant='filled' mt='5' borderRadius={17} required/>
+                    placeholder='Password' variant='filled' mt='5' borderRadius={17} required/>
                 <InputRightElement w='4.5rem' mt='5'>
                 <Button h='1.75rem' size='sm' bg='gray.300' borderRadius={17} onClick={handleClick}>
                     {show ? <BiHide /> : <BiShowAlt /> }
@@ -98,11 +98,11 @@ export default function Login(){
             </InputGroup>
             <VStack justify='center' mt='5'> 
             <Button variant='link' colorScheme='blue'>
-                Mot de passe oublié?
+                Forgot your password?
             </Button>
             <Button type="submit" colorScheme='blue' 
                 w='60%' borderRadius={17} onClick={handleSubmit}>
-                Se connecter
+                Login
             </Button>
             </VStack>          
         </FormControl>

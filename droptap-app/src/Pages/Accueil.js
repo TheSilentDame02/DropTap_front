@@ -248,7 +248,7 @@ function Accueil() {
             >
                 <GridItem colSpan={5} rowSpan={1}>
                     <Heading as="h1" size="md" fontWeight="600">
-                        Ma consommation
+                        My consumption
                     </Heading>
                 </GridItem>
                 <GridItem colSpan={1} rowSpan={1}>
@@ -267,7 +267,7 @@ function Accueil() {
                         <ProgressBar
                             conso={consoJour}
                             seuil={seuilJour}
-                            titre="Aujourd'hui"
+                            titre="Today"
                             date={today}
                         />
                     </Box>
@@ -284,7 +284,7 @@ function Accueil() {
                         <ProgressBar
                             conso={consoMois}
                             seuil={seuilMois}
-                            titre="Ce mois"
+                            titre="This month"
                             date={thisMonth}
                         />
                     </Box>
@@ -298,7 +298,7 @@ function Accueil() {
                         bg="white"
                     >
                         <VStack>
-                            <Text fontSize="sm">Robinet</Text>
+                            <Text fontSize="sm">Water shutoff</Text>
                             <Switch
                                 size="lg"
                                 isChecked={robinet && "isChecked"}
@@ -326,7 +326,7 @@ function Accueil() {
                     >
                         <VStack>
                             <Text fontSize="sm" align="center">
-                                Détection des fuites
+                                Leak detection
                             </Text>
                             <Switch
                                 size="lg"
@@ -339,13 +339,13 @@ function Accueil() {
 
                 <GridItem colSpan={3} rowSpan={1}>
                     <Heading as="h1" size="md" fontWeight="600">
-                        Qualité de l'eau
+                        Water quality
                     </Heading>
                 </GridItem>
 
                 <GridItem colSpan={3} rowSpan={1}>
                     <Heading as="h1" size="md" fontWeight="600">
-                        Statistiques
+                        Statistics
                     </Heading>
                 </GridItem>
 
@@ -361,8 +361,7 @@ function Accueil() {
                             <HStack>
                                 <Image h="150px" pr={4} src={QualityGood} />
                                 <Text>
-                                    Vous pouvez boire l'eau du robinet sans
-                                    problème.
+                                    You can drink tap water safely.
                                 </Text>
                             </HStack>
                         )}
@@ -370,15 +369,14 @@ function Accueil() {
                             <HStack>
                                 <Image h="150px" pr={4} src={QualityBad} />
                                 <Text>
-                                    La qualité de l'eau est mauvaise en ce
-                                    moment.
+                                    The water quality is poor at the moment.
                                 </Text>
                             </HStack>
                         )}
                         {qualite === "medium" && (
                             <HStack>
                                 <Image h="150px" pr={4} src={QualityMedium} />
-                                <Text>La qualité de l'eau est moyenne.</Text>
+                                <Text>The water quality is average.</Text>
                             </HStack>
                         )}
                     </Box>
