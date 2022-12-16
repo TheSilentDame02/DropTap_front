@@ -148,6 +148,7 @@ export default function Rapport(){
                 statistiquePrixYear += statistiqueConsommationYear[j][1];
             }
 
+
             setPrixConsommationDay(statistiquePrixDay);
             setPrixConsommationMonth(statistiquePrixMonth);
             setPrixConsommationYear(statistiquePrixYear);
@@ -156,7 +157,7 @@ export default function Rapport(){
                 labels: statistiqueConsommationDay.map((data)=>data[0]),
                 datasets: [{
                     label: "Consommation d'eau",
-                    data: statistiqueConsommationDay.map((data)=>Math.floor(data[1])),
+                    data: statistiqueConsommationDay.map((data)=>data[1]),
                     borderRadius: 1999,
                     backgroundColor: '#55C2FF',
                     barThickness: 10,
@@ -169,7 +170,7 @@ export default function Rapport(){
                 labels: statistiqueConsommationMonth.map((data)=>data[0]),
                 datasets: [{
                     label: "Consommation d'eau",
-                    data: statistiqueConsommationMonth.map((data)=>Math.floor(data[1])),
+                    data: statistiqueConsommationMonth.map((data)=>data[1]),
                     borderRadius: 1999,
                     backgroundColor: '#55C2FF',
                     barThickness: 10,
@@ -182,7 +183,7 @@ export default function Rapport(){
                 labels: statistiqueConsommationYear.map((data)=>data[0]),
                 datasets: [{
                     label: "Consommation d'eau",
-                    data: statistiqueConsommationYear.map((data)=>Math.floor(data[1])),
+                    data: statistiqueConsommationYear.map((data)=>data[1]),
                     borderRadius: 1999,
                     backgroundColor: '#55C2FF',
                     barThickness: 10,
