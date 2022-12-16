@@ -242,7 +242,7 @@ export default function Rapport(){
                                     </Center>
                                 </TabPanel>
                                 <TabPanel>
-                                <Center mb={2} fontSize='large'>Statistics of the Week: </Center>
+                                <Center mb={2} fontSize='large'>Statistics of the Month: </Center>
                                 <BarChart chartData={userDataMonth} />
                                     <Center>
                                         <VStack>
@@ -264,7 +264,7 @@ export default function Rapport(){
                                     </Center>
                                 </TabPanel>
                                 <TabPanel>
-                                <Center mb={2} fontSize='large'>Statistics of the Month:</Center>
+                                <Center mb={2} fontSize='large'>Statistics of the Year:</Center>
                                 <BarChart chartData={userDataYear} />
                                     <Center>
                                         <VStack>
