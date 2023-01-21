@@ -9,9 +9,8 @@ import {
     Text,
     Grid,
 } from "@chakra-ui/react";
-import React, {useEffect} from "react";
 import Notifications from "../Components/Notifications";
-import { useState } from "react";
+import React,{ useState, useEffect } from "react";
 import {    CircularProgressbarWithChildren} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import QualityGood from "../Assets/Images/quality-good.jpg";
@@ -40,10 +39,10 @@ Api.getConsommations().then(response => {
     let dateAuj = ((new Date()).toString().split(' '))[2];
     dataStatistique = response.data;
     response.data.forEach(data => {
-        dataConsommation += data.quantite;
+        dataConsommation += data.debit;
         let jourConsommation = (((data.createdAt.toString().split('T'))[0]).split('-'))[2];
         if (dateAuj == jourConsommation){
-            dataConsommationJour += data.quantite;
+            dataConsommationJour += data.debit;
         }
     });
 });
@@ -115,7 +114,6 @@ function Accueil() {
         qualites = response.data.content;
         console.log(qualites[0]);
         if(qualites[0].qualite<10){
-            console.log("good");
             setQualite("good");
         }else if(qualites[0].qualite>=10 && qualites[0].qualite<30){
             setQualite("medium");
@@ -155,37 +153,36 @@ function Accueil() {
             setSeuilMois(dataSeuil * 30);
             setConsoJour(dataConsommationJour);
             setConsoMois(dataConsommation);
-            let heureConsommation =[];
-            let quantiteConsomme =[];
+            let statistiqueConsommation =[
+                ['00', 0], ['01', 0], ['02', 0], ['03', 0], ['04', 0], ['05', 0],
+                ['06', 0], ['07', 0], ['08', 0], ['09', 0], ['10', 0], ['11', 0],
+                ['12', 0], ['13', 0], ['14', 0], ['15', 0], ['16', 0], ['17', 0],
+                ['18', 0], ['19', 0], ['20', 0], ['21', 0], ['22', 0], ['23', 0]];
             let jourStatistique = ((new Date()).toString().split(' '))[2];
+
 
             dataStatistique.forEach(data => {
                 let jourConsommation = (((data.createdAt.toString().split('T'))[0]).split('-'))[2];
                 if (jourConsommation==jourStatistique){
-                    heureConsommation.push((((data.createdAt.toString().split('T'))[1]).split(':'))[0]);
-                    quantiteConsomme.push(data.quantite);
+                    for (let i=0; i<24; i++){
+                        if ((statistiqueConsommation[i][0])==(((data.createdAt.toString().split('T'))[1]).split(':'))[0]){
+                            statistiqueConsommation[i][1] += data.debit;
+                        }
+                    }
                 }
 
             });
 
-            for (let i = 1; i < quantiteConsomme.length; i++) {
-                let x = quantiteConsomme[i];
-                let j = i - 1;
-                let x0 = heureConsommation[i];
-                while (j >= 0 && heureConsommation[j] > x0) {
-                    quantiteConsomme[j + 1] = quantiteConsomme[j];
-                    heureConsommation[j + 1] = heureConsommation[j];
-                    j--;
-                }
-                quantiteConsomme[j + 1] = x;
-                heureConsommation[j + 1] = x0;
-            }
+
+
+
+
 
             setUserData({
-                labels: heureConsommation,
+                labels: statistiqueConsommation.map((data)=>data[0]),
                 datasets: [{
                     label: "Consommation d'eau",
-                    data: quantiteConsomme,
+                    data: statistiqueConsommation.map((data)=>data[1]),
                     borderRadius: 1999,
                     backgroundColor: '#55C2FF',
                     barThickness: 10,
@@ -221,7 +218,7 @@ function Accueil() {
                         let jourConsommation = (((data.createdAt.toString().split('T'))[0]).split('-'))[2];
 
 
-                        if ((heureDetection <= heureConsommation) && (data.quantite!=0) && (jourConsommation==jourDetection)){
+                        if ((heureDetection <= heureConsommation) && (data.debit!=0) && (jourConsommation==jourDetection)){
                             toggleRobinet();
                         }
                     });
@@ -251,7 +248,7 @@ function Accueil() {
             >
                 <GridItem colSpan={5} rowSpan={1}>
                     <Heading as="h1" size="md" fontWeight="600">
-                        Ma consommation
+                        My consumption
                     </Heading>
                 </GridItem>
                 <GridItem colSpan={1} rowSpan={1}>
@@ -268,9 +265,9 @@ function Accueil() {
                         bg="white"
                     >
                         <ProgressBar
-                            conso={consoJour}
+                            conso={(consoJour).toFixed(2)}
                             seuil={seuilJour}
-                            titre="Aujourd'hui"
+                            titre="Today"
                             date={today}
                         />
                     </Box>
@@ -285,9 +282,9 @@ function Accueil() {
                         bg="white"
                     >
                         <ProgressBar
-                            conso={consoMois}
+                            conso={(consoMois).toFixed(2)}
                             seuil={seuilMois}
-                            titre="Ce mois"
+                            titre="This month"
                             date={thisMonth}
                         />
                     </Box>
@@ -301,7 +298,7 @@ function Accueil() {
                         bg="white"
                     >
                         <VStack>
-                            <Text fontSize="sm">Robinet</Text>
+                            <Text fontSize="sm">Water shutoff</Text>
                             <Switch
                                 size="lg"
                                 isChecked={robinet && "isChecked"}
@@ -329,7 +326,7 @@ function Accueil() {
                     >
                         <VStack>
                             <Text fontSize="sm" align="center">
-                                Détection des fuites
+                                Leak detection
                             </Text>
                             <Switch
                                 size="lg"
@@ -342,13 +339,13 @@ function Accueil() {
 
                 <GridItem colSpan={3} rowSpan={1}>
                     <Heading as="h1" size="md" fontWeight="600">
-                        Qualité de l'eau
+                        Water quality
                     </Heading>
                 </GridItem>
 
                 <GridItem colSpan={3} rowSpan={1}>
                     <Heading as="h1" size="md" fontWeight="600">
-                        Statistiques
+                        Statistics
                     </Heading>
                 </GridItem>
 
@@ -364,8 +361,7 @@ function Accueil() {
                             <HStack>
                                 <Image h="150px" pr={4} src={QualityGood} />
                                 <Text>
-                                    Vous pouvez boire l'eau du robinet sans
-                                    problème.
+                                    You can drink tap water safely.
                                 </Text>
                             </HStack>
                         )}
@@ -373,15 +369,14 @@ function Accueil() {
                             <HStack>
                                 <Image h="150px" pr={4} src={QualityBad} />
                                 <Text>
-                                    La qualité de l'eau est mauvaise en ce
-                                    moment.
+                                    The water quality is poor at the moment.
                                 </Text>
                             </HStack>
                         )}
                         {qualite === "medium" && (
                             <HStack>
                                 <Image h="150px" pr={4} src={QualityMedium} />
-                                <Text>La qualité de l'eau est moyenne.</Text>
+                                <Text>The water quality is average.</Text>
                             </HStack>
                         )}
                     </Box>
